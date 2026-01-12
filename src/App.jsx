@@ -7,24 +7,20 @@ import NavBar from './components/NavBar/NavBar';
 import MailboxForm from './components/MailboxForm/MailboxForm';
 import MailboxList from './components/MailboxList/MailboxList';
 import MailboxDetails from './components/MailboxDetails/MailboxDetails';
-
-// const initialState = [
-//   { _id: 1, boxOwner: 'Lilica', boxSize: 'Small' },
-//   { _id: 2, boxOwner: 'Maria', boxSize: 'Large' },
-//   { _id: 3, boxOwner: 'Leo', boxSize: 'Small' },
-//   { _id: 4, boxOwner: 'Jane', boxSize: 'Medium' },
-//   { _id: 5, boxOwner: 'Lucas', boxSize: 'Medium' },
-//   { _id: 6, boxOwner: 'Joe', boxSize: 'Large' },
-//   { _id: 7, boxOwner: 'Francis', boxSize: 'Small' },
-// ];
-
+import LetterForm from './components/LetterForm/LetterForm';
 
 const App = () => {
   const [mailboxes, setMailboxes] = useState([]);
+  const [letters, setLetters] = useState([]);
 
   const addBox = (newMailboxData) => {
     newMailboxData._id = mailboxes.length + 1;
     setMailboxes([...mailboxes, newMailboxData]);
+  };
+
+  const addLetter = (newLetterData) => {
+    newLetterData._id = letters.length + 1;
+    setLetters([...letters, newLetterData]);
   };
 
   return (
@@ -38,8 +34,12 @@ const App = () => {
           element={<MailboxForm addBox={addBox} />}
         />
         <Route
+          path="/new-letter"
+          element={<LetterForm addLetter={addLetter} mailboxes={mailboxes}/>}
+        />
+        <Route
           path="/mailboxes/:mailboxId"
-          element={<MailboxDetails mailboxes={mailboxes} />}
+          element={<MailboxDetails mailboxes={mailboxes} letters={letters}/>}
         />
         <Route path="*" element={<h2>Whoops, nothing here!</h2>} />
       </Routes>

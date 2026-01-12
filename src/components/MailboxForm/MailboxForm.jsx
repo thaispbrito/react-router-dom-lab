@@ -7,37 +7,37 @@ const initialState = {
 };
 
 const MailboxForm = (props) => {
-  const [formData, setFormData] = useState(initialState);
+  const [boxFormData, setBoxFormData] = useState(initialState);
   const navigate = useNavigate();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    props.addBox(formData);
-    setFormData(initialState);
+    props.addBox(boxFormData);
+    setBoxFormData(initialState);
     navigate('/mailboxes');
   };
 
   const handleChange = ({ target }) => {
-    setFormData({ ...formData, [target.name]: target.value });
+    setBoxFormData({ ...boxFormData, [target.name]: target.value });
   };
 
   return (
     <main>
-      <h2>New Mailbox</h2>
+      <h1>New Mailbox</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="boxOwner">Enter a Boxholder:</label>
         <input
           type="text"
           id="boxOwner"
           name="boxOwner"
-          value={formData.boxOwner}
+          value={boxFormData.boxOwner}
           onChange={handleChange}
         />
         <label htmlFor="boxSize">Select a Box Size:</label>
         <select
           id="boxSize"
           name="boxSize"
-          value={formData.boxSize}
+          value={boxFormData.boxSize}
           onChange={handleChange}
         >
           <option value="">--Choose a size--</option>

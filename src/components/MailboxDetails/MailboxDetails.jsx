@@ -5,16 +5,38 @@ import { useParams } from 'react-router';
 const MailboxDetails = (props) => {
 
   const { mailboxId } = useParams();
+
   const selectedBox = props.mailboxes.find(
     (mailbox) => mailbox._id === Number(mailboxId)
   );
 
+  const selectedLetters = props.letters.filter((letter) => (
+    letter.mailboxId === Number(mailboxId)
+  ));
+
+  if (!selectedBox) {
+    return <h2>Mailbox not found</h2>;
+  }
   return (
     <>
       <h1>Mailbox {mailboxId}</h1>
       <h2>Details</h2>
       <p>Boxholder: {selectedBox.boxOwner}</p>
       <p>Box Size: {selectedBox.boxSize}</p>
+      
+      <h2>Letters</h2>
+      {selectedLetters.length === 0 ? (
+        <p>No letters yet.</p>
+      ) : (
+        <ul>
+          {selectedLetters.map(letter => (
+            <li key={letter._id}>
+              <p>Dear {letter.recipient},</p>
+              <p>{letter.message}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };
