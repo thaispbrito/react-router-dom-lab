@@ -1,7 +1,7 @@
 // src/App.jsx
 
 import { useState } from 'react';
-import { Route, Routes } from 'react-router'
+import { Route, Routes } from 'react-router';
 
 import NavBar from './components/NavBar/NavBar';
 import MailboxForm from './components/MailboxForm/MailboxForm';
